@@ -1,0 +1,3 @@
+C:/Users/79152/Documents/GitHub/mai_labs/Test11.04/cmake-build-debug/CMakeFiles/Test11_04.dir
+C:/Users/79152/Documents/GitHub/mai_labs/Test11.04/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/79152/Documents/GitHub/mai_labs/Test11.04/cmake-build-debug/CMakeFiles/rebuild_cache.dir

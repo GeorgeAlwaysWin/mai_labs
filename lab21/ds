@@ -1,0 +1,99 @@
+#!/bin/bash
+
+suicide=0
+content=0
+name=0
+agreement=0
+
+while [ -n "$1" ]
+do
+case "$1" in
+-h) echo -e './ds command version 1.0.0 \nScript creator Georgiy Pobedonostsev\n\nUsage: ./ds [options] [file]\n\nDelete all synonyms of the given file\n\nOptions:\n\n-h Show this help text\n-s delete original file\n-n delete files with the same name\n-c delete files with the same content\n-y answer "yes" to all questions\n' ;;
+-s) suicide=1 ;;
+-c) content=1 ;;
+-n) name=2 ;;
+-y) agreement=1 ;;
+*) if [ -f "$1" ]
+   then
+     file="$1"
+   else
+     echo "Error: $1 - No such file" >&2
+     exit 1
+   fi
+   break ;;
+esac
+shift
+done
+
+scenario=$(($content + $name))
+
+if [ $agreement -eq 0 ]
+then
+ case $scenario in
+  0|1) echo "Are you sure you want to delete all files with the same content as $file?" ;;
+  2) echo "Are you sure you want to delete all files with the same name as $file?" ;;
+  3) echo "Are you sure you want to delete all files with the same name and content as $file?" ;;
+  *) echo "Unexpected error. Please try again." >&2
+     exit 2 ;;
+ esac
+ while :
+ do
+  read -p '(y/n)' item
+  case "$item" in
+   y|Y) echo "Deleting files..."
+        break ;;
+   n|N) echo "Command aborted"
+        exit 1 ;;
+   *) echo "Please enter \"y\" if you want to continue or \"n\" if you want to stop" ;;
+  esac
+ done
+fi
+
+TMP=`mktemp`
+bn=$(basename -- "$file")
+cp "$file" "$TMP"
+deleted_files=-1
+
+function del_name {
+for f in $(find . -type f -name "$bn")
+do
+deleted_files=$(( $deleted_files + 1 ))
+rm "$f"
+echo -ne "$deleted_files files deleted\r"
+
+done
+}
+
+function del_content {
+for f in $(find . -type f)
+do
+ if cmp -s $TMP $f && [ $f != $TMP ]
+ then
+ deleted_files=$(( $deleted_files + 1 ))
+ rm "$f"
+ echo -ne "$deleted_files files deleted\r"
+ fi
+done
+}
+
+case "$scenario" in
+ 0|1) del_content ;;
+ 2) del_name  ;;
+ 3) del_name
+    del_content ;;
+ *) echo "Unexpected error. Please try again." >&2
+    exit 2 ;;
+esac
+
+if [ $suicide -eq 0 ]
+then
+mv "$TMP" "$file"
+else
+deleted_files=$(( $deleted_files + 1 ))
+fi
+
+echo -e "$deleted_files files deleted"
+echo "Done"
+
+#TODO
+#what to do with no permissions?
