@@ -1,0 +1,96 @@
+\documentclass{article}
+\usepackage[T2A]{fontenc}
+\usepackage[a5paper]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[english, russian]{babel}
+\usepackage{fancyhdr}
+\usepackage{amsthm}
+\usepackage{breqn}
+\usepackage{amsmath}
+\usepackage{setspace}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+
+\geometry{verbose,a5paper,tmargin=2cm,lmargin=2.5cm,rmargin=2.5cm}
+\linespread{0.9}
+\setcounter{page}{233}
+\setcounter{figure}{34}
+
+\cfoot{\overline{\quad\quad\textsl{\thepage}\quad\quad}}
+\renewcommand{\headrulewidth}{0pt}
+\pagestyle{fancy}
+
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\@makecaption}{#1: #2}
+  {#1\sbox8{#2}\ifdim\wd8=\z@\else: #2\fi}
+  {}{\ddt}
+\makeatother
+
+
+\begin{document} 
+
+\begin{wrapfigure}{r}{0.36\textwidth}
+
+\includegraphics[width=0.9\linewidth]{graphic35.PNG}
+\caption{}
+
+\label{fig:mpr}
+
+\end{wrapfigure}
+\noindent Это неравенство верно для всех $x_0$, и так как при любом фиксированном $\delta$ имеем $\underset{x_0\to +\infty}\lim (2x_0\delta-\delta^2)=+\infty$,
+то из (6.24) получаем
+\begin{equation} \notag
+    \omega(\delta; x^2)=+\infty, -\infty<x<+\infty.
+\end{equation}
+\par Найдем теперь модуль непрерывности функции $y = x^2$ на отрезке\\$[0, 1]$. Интуитивно ясно, что так как модуль непрерывности $\omega(\delta)$ описывает, согласно определению, наибольший рост функции на отрезке длины $\delta$, то, чтобы получить модуль непрерывности функции, в данном случае следует взять отрезок $[1 - \delta, 1]$, на котором функция $f(x)=x^2, 0\leqslant x \leqslant1$, растет наиболее быстро: модуль непрерывности совпадает (рис.35) с приращением функции на этом отрезке $\omega(\delta)=f(1)-f(1-\delta)=1-(1-\delta)^2=2\delta-\delta^2$.
+\par Аналитически это проверяется следующим образом. Пусть 
+$0\leqslant x'' -\delta \leqslant x'\leqslant x" \leqslant 1$
+и, следовательно, $0 \leqslant x'' - x' \leqslant \delta$, тогда, в силу неравенства
+\begin{equation} \notag
+    x''^2 - x'^2 \leqslant x''^2 - (x''-\delta)^2 = 2x''\delta-\delta^2 \leqslant 2\delta-\delta^2,
+\end{equation}
+получим
+\begin{equation} \tag {6.25}
+   \omega(\delta; x^2)=\underset{|x''-x'|<\delta}\sup( x''^2 - x'^2)\leqslant 2\delta-\delta^2,
+\end{equation}
+но если взять $x' = 1-\delta, x''=1$, то 
+\begin{equation} \tag {6.26}
+   \omega(\delta; x^2)=\underset{|x''-x'|<\delta}\sup( x''^2 - x'^2) \geqslant 1 - (1-\delta)^2= 2\delta-\delta^2.
+\end{equation}
+Из оценок (6.25) и (6.26) следует, что на отрезке [0, 1] имеем $\omega(\delta; x^2)=2\delta-\delta^2$.\\
+\textbf{2.} Рассмотрим функцию $y = \sin\frac{1}{x}, x\neq0$. С одной стороны,
+\begin{multline} \notag
+\begin{gathered}
+   \omega(\delta; \sin\frac{1}{x})=\underset{|x''-x'|<\delta}\sup |\sin\frac{1}{x''}-\sin\frac{1}{x'}| \leqslant\\ \leqslant\underset{|x''-x'|<\delta}\sup (|\sin\frac{1}{x''}|-|\sin\frac{1}{x'}|) \leqslant \underset{|x''-x'|<\delta}\sup 2 = 2.
+\end{gathered}
+\end{multline}\\
+С другой стороны, выбрав $x''_n=1/(\frac{\pi}{2}+2\pi n), x'_n=1/(\frac{3}{2}\pi+2\pi n)$ и зафиксировав $n$ так, что $|x'_n|\leqslant\frac{\delta}{2},|x''_n|\leqslant\frac{\delta}{2}$, и поэтому $|x''_n-x'_n|\leqslant|x'_n|+|x''_n|\leqslant\delta$, будем иметь
+\begin{equation} \notag
+   \omega(\delta; \sin\frac{1}{x})\geqslant\sin\frac{1}{x''_n}-\sin\frac{1}{x'_n}=1+1=2.
+\end{equation}
+Из полученных оценок следует, что $\omega(\delta;\sin\frac{1}{x})=2$.\\
+\par\textbf{3.} Рассмотрим функцию $y=\frac{1}{x}$ на интервале (0,1).
+\parПри любом фиксированном $\delta, 0<\delta<1$, имеем
+\begin{multline} \notag
+\begin{gathered}
+   \quad\omega(\delta; \frac{1}{x})=\underset{|x''-x'|<\delta}\sup (\frac{1}{x'}-\frac{1}{x''})= \underset{x'\leqslant x''\leqslant x''+\delta}\sup (\frac{1}{x'}-\frac{1}{x''}) \geqslant\\
+   \quad\geqslant\frac{1}{x_0}-\frac{1}{x_0+\delta}=\frac{\delta}{x_0(x_0+\delta)}\to+\infty $ при $ x_0 \to +0.
+\end{gathered}
+\end{multline}\\
+Таким образом, $\omega(\delta;\frac{1}{\alpha})=+\infty$.
+\par В терминах модуля непрерывности функции ее равномерная непрерывность может быть описана следующим образом.\\
+\textsf{\textbf{\small{Т Е О Р Е М А 6.}}} \textit{Для того чтобы определенная на отрезке  функция  была непрерывно равномерна на нем, необходимо и достаточно, чтобы}
+\begin{equation} \tag {6.27}
+    \underset{\delta\to 0}\lim \omega(\delta, f)=0.
+\end{equation}
+\textsf{\small{Д о к а з а т е л ь с т в о.}} Пусть функция $f$ равномерно непрерывна на отрезке $[a, b]$, т. е. выполняется условие (6.15), тогда для любого $\epsilon>0$ существует такое $\delta_\epsilon>0$, что если $x'\in[a,b], x''\in[a,b],|x''-x'|<\delta_\epsilon$, то $|f(x'')-f(x')|<\frac{\epsilon}{2}$. Отсюда следует, что для любого $\delta, 0<\delta<\delta_\epsilon$, выполняется неравенство\\
+\begin{equation} \notag
+    \omega(\delta, f)=\underset{|x''-x'|\leqslant\delta}\sup |f(x'')-f(x')|\leqslant\frac{\epsilon}{2}<\epsilon, x', x''\in[a,b],
+\end{equation}
+т. е. если $0<\delta<\delta_\epsilon$, то $\omega(\delta; f)<\epsilon$. Это и означает, что $\underset{\delta\to 0}\lim \omega(\delta, f)=0.$ Н е о б х о д и м о с т ь условия (6.27) доказана.
+\par Докажем его д о с т а т о ч н о с т ь для равномерной непрерывности. Выполнение условия (6.27) означает, что для любого $\epsilon>0$ существует такое $\delta_\epsilon>0$, что если $0<\delta<\delta_\epsilon$, то
+
+\end{document}
